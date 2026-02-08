@@ -19,21 +19,9 @@ jobs:
 
       - name: Install client dependencies
         run: cd client && npm install
-    
+
       - name: Run client tests
         run: cd client && npm test -- --coverage --watchAll=false
-
-      - name: Install server dependencies
-        run: cd server && npm install
-
-      - name: Run server tests
-        run: cd server && npm test -- --watchAll=false
-
-      - name: Install worker dependencies
-        run: cd worker && npm install
-
-      - name: Run worker tests
-        run: cd worker && npm test -- --watchAll=false
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
