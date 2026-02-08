@@ -60,21 +60,3 @@ jobs:
           file: ./nginx/Dockerfile.dev
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/fib-nginx:latest
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_KEY }}
-          script: |
-            cd ${{ secrets.DEPLOY_PATH }}
-            git pull origin main
-            docker-compose pull
-            docker-compose up -d
